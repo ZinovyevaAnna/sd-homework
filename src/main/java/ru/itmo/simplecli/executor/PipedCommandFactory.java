@@ -3,6 +3,9 @@ package ru.itmo.simplecli.executor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to construct piped commands
+ */
 public class PipedCommandFactory {
     public static Executable construct(List<List<String>> args, EnvironmentManager environment) {
         var executables = new ArrayList<Executable>();

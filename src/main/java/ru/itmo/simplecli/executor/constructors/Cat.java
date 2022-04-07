@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
+/**
+ * Concatenates given files content
+ */
 public class Cat implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

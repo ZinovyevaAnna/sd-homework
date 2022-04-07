@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
+/**
+ * Counts number of lines, symbols and bytes for every given file
+ */
 public class WC implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

@@ -2,6 +2,9 @@ package ru.itmo.simplecli.executor;
 
 import java.util.List;
 
+/**
+ * Abstract class for an explicit command
+ */
 public abstract class Command implements Executable {
     protected EndStatus status;
     protected List<String> args;
@@ -13,6 +16,7 @@ public abstract class Command implements Executable {
         this.environment = environment;
     }
 
+    @Override
     public String getOutput() {
         return output;
     }

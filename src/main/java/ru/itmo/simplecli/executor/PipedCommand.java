@@ -2,6 +2,9 @@ package ru.itmo.simplecli.executor;
 
 import java.util.List;
 
+/**
+ * Piped command executes every command, pass output of one as input to the next one
+ */
 class PipedCommand implements Executable {
     private EndStatus status;
     private String output;

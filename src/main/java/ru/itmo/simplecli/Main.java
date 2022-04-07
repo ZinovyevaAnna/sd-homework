@@ -4,6 +4,9 @@ import ru.itmo.simplecli.executor.*;
 
 import java.util.*;
 
+/**
+ * Entry point. Loop: read - parse - execute.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

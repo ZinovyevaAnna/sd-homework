@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Searches pattern in given files
+ */
 public class Grep implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

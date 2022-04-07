@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * Class for not build-ins command
+ */
 public class External implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

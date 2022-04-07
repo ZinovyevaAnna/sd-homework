@@ -5,6 +5,9 @@ import ru.itmo.simplecli.executor.Command;
 
 import java.util.List;
 
+/**
+ * Returns given args without changes
+ */
 public class Echo implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

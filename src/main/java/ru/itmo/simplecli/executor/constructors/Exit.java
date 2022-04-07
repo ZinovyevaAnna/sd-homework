@@ -5,6 +5,9 @@ import ru.itmo.simplecli.executor.Command;
 
 import java.util.List;
 
+/**
+ * Exits application
+ */
 public class Exit implements CommandConstructor {
     @Override
     public Command construct(List<String> args, EnvironmentManager environment) {

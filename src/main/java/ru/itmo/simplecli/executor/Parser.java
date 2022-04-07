@@ -3,6 +3,9 @@ package ru.itmo.simplecli.executor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple parser that handles single and double quotes
+ */
 public class Parser {
     private final EnvironmentManager environment;
     private List<Wrapped> result;
@@ -12,12 +15,18 @@ public class Parser {
         this.environment = environment;
     }
 
+    /**
+     * @param input string that contains command with args
+     */
     public void parse(String input) {
         result = new ArrayList<>();
         state = State.NO_QUOTED;
         runParse(input);
     }
 
+    /**
+     * @return result of parsing
+     */
     public List<List<String>> getResult() {
         var processed = result.stream().map(Wrapped::getValue).toList();
         List<List<String>> piped = new ArrayList<>();
@@ -34,6 +43,9 @@ public class Parser {
         return piped;
     }
 
+    /**
+     * @return value if input string had proper quotes
+     */
     public boolean hasUnclosedQuote() {
         return state != State.NO_QUOTED;
     }
@@ -80,7 +92,7 @@ public class Parser {
         }
     }
 
-    public void runParse(String string) {
+    private void runParse(String string) {
         StringBuilder current = new StringBuilder();
         for (int pos = 0; pos < string.length(); pos++) {
             var symbol = string.charAt(pos);

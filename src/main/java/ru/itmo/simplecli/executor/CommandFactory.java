@@ -4,6 +4,9 @@ import ru.itmo.simplecli.executor.constructors.*;
 
 import java.util.List;
 
+/**
+ * Class to construct commands
+ */
 public class CommandFactory {
     public static Executable construct(List<String> args, EnvironmentManager environment) {
         if (args.size() == 0) {

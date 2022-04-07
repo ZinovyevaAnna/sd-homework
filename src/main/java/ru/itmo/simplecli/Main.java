@@ -37,7 +37,9 @@ public class Main {
             if (command.getEndStatus() == Executable.EndStatus.EXIT) {
                 break;
             }
-            System.out.println(command.getOutput());
+            if (command.getOutput() != null) {
+                System.out.println(command.getOutput());
+            }
         }
     }
 }

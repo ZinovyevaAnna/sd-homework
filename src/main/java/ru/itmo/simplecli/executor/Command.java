@@ -1,6 +1,5 @@
 package ru.itmo.simplecli.executor;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -26,6 +25,7 @@ public abstract class Command implements Executable {
     public EndStatus getEndStatus() {
         return status;
     }
+
     @Override
     public abstract void execute(String input);
 

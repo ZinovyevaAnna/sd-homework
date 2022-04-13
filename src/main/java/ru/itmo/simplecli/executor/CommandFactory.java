@@ -24,6 +24,8 @@ public class CommandFactory {
             case "grep" -> new Grep().construct(args.subList(1, args.size()), environment);
             case "pwd" -> new Pwd().construct(args.subList(1, args.size()), environment);
             case "wc" -> new WC().construct(args.subList(1, args.size()), environment);
+            case "ls" -> new Ls().construct(args.subList(1, args.size()), environment);
+            case "cd" -> new Cd().construct(args.subList(1, args.size()), environment);
             default -> new External().construct(args, environment);
         };
     }

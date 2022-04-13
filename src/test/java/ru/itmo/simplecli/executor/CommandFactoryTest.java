@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CommandFactoryTest {
     public EnvironmentManager env = new EnvironmentManager();
+
     @Test
     void testImplemented() {
         var args = List.of("cat");
@@ -42,6 +43,14 @@ class CommandFactoryTest {
         args = List.of("wc");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
                 new WC().construct(args.subList(1, args.size()), env).getClass());
+
+        args = List.of("ls");
+        assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
+                new Ls().construct(args.subList(1, args.size()), env).getClass());
+
+        args = List.of("cd");
+        assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
+                new Cd().construct(args.subList(1, args.size()), env).getClass());
 
 
         args = List.of("unknowncommand");

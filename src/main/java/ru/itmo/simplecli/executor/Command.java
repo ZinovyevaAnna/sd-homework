@@ -25,6 +25,7 @@ public abstract class Command implements Executable {
     public EndStatus getEndStatus() {
         return status;
     }
+
     @Override
     public abstract void execute(String input);
 

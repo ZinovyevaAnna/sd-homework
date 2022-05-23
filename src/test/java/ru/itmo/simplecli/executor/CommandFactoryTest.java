@@ -29,11 +29,6 @@ class CommandFactoryTest {
                 new Exit().construct(args.subList(1, args.size()), env).getClass());
 
 
-        args = List.of("grep");
-        assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new Grep().construct(args.subList(1, args.size()), env).getClass());
-
-
         args = List.of("pwd");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
                 new Pwd().construct(args.subList(1, args.size()), env).getClass());

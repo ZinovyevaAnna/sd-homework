@@ -21,7 +21,6 @@ public class CommandFactory {
             case "cat" -> new Cat().construct(args.subList(1, args.size()), environment);
             case "echo" -> new Echo().construct(args.subList(1, args.size()), environment);
             case "exit" -> new Exit().construct(args.subList(1, args.size()), environment);
-            case "grep" -> new Grep().construct(args.subList(1, args.size()), environment);
             case "pwd" -> new Pwd().construct(args.subList(1, args.size()), environment);
             case "wc" -> new WC().construct(args.subList(1, args.size()), environment);
             default -> new External().construct(args, environment);

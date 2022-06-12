@@ -56,23 +56,24 @@ public class Parser {
             this.value = value;
         }
         public String getValue() {
-            if (value.indexOf("$") != -1) {
-                var start = value.indexOf("$");
-                var end = start + 1;
-                while (end < value.length()) {
-                    var symbol = value.charAt(end);
-                    if (!Character.isAlphabetic(symbol)
-                    && !Character.isDigit(symbol)
-                    && !(symbol == '_')) {
-                            break;
-                    }
-                    end++;
-                }
-                var varName = value.substring(start + 1, end);
-                value.delete(start, end);
-                value.insert(start, environment.get(varName));
+            if (value.indexOf("$") == -1) {
+                return value.toString();
             }
-            return value.toString();
+            var start = value.indexOf("$");
+            var end = start + 1;
+            while (end < value.length()) {
+                var symbol = value.charAt(end);
+                if (!Character.isAlphabetic(symbol)
+                && !Character.isDigit(symbol)
+                && !(symbol == '_')) {
+                        break;
+                }
+                end++;
+            }
+            var varName = value.substring(start + 1, end);
+            value.delete(start, end);
+            value.insert(start, environment.get(varName));
+            return getValue();
         }
     }
 

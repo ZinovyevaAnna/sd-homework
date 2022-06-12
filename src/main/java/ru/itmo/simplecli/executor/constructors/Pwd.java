@@ -14,7 +14,7 @@ public class Pwd implements CommandConstructor {
         return new Command(args, environment) {
             @Override
             public void execute(String string) {
-                output = environment.get("PWD");
+                output = System.getProperty("user.dir");
                 status = EndStatus.SUCCESS;
             }
         };

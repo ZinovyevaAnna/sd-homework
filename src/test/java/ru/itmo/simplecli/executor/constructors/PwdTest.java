@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
 import ru.itmo.simplecli.executor.Executable;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +17,7 @@ class PwdTest {
         var cmd = new Pwd().construct(new ArrayList<>(), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
-        assertEquals(System.getenv("PWD"), cmd.getOutput());
+        assertEquals(Paths.get("").toAbsolutePath().toString(), cmd.getOutput());
     }
 
 }

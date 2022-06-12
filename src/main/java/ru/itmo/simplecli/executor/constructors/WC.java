@@ -23,19 +23,26 @@ public class WC implements CommandConstructor {
                     output = "Not enough arguments for `wc` command";
                     return;
                 }
-                if (args.size() == 0) {
-                    output = handle(new BufferedReader(new StringReader(input)), null);
-                    status = EndStatus.SUCCESS;
-                    return;
-                }
-
                 try {
-                    var sb = new StringBuilder();
-                    for (var arg : args) {
-                        var file = new BufferedReader(new FileReader(arg));
-                        sb.append(handle(file, arg));
+                    if (args.size() == 0) {
+                        var reader = new BufferedReader(new StringReader(input));
+                        output = handle(reader, "").toString();
+                    } else {
+                        int totalLines = 0, totalWords = 0, totalBytes = 0;
+                        var builder = new StringBuilder();
+                        for (var arg : args) {
+                            var file = new BufferedReader(new FileReader(arg));
+                            var result = handle(file, arg);
+                            totalLines += result.lines;
+                            totalWords += result.words;
+                            totalBytes += result.bytes;
+                            builder.append(result);
+                        }
+                        if (args.size() > 1) {
+                            builder.append(new ResultLine(totalLines, totalWords, totalBytes, "total"));
+                        }
+                        output = builder.toString();
                     }
-                    output = sb.toString();
                     status = EndStatus.SUCCESS;
                 } catch (IOException e) {
                     status = EndStatus.ERROR;
@@ -43,23 +50,31 @@ public class WC implements CommandConstructor {
                 }
             }
 
-            private String handle(BufferedReader file, String name) {
-                var sb = new StringBuilder();
-                var lines = 0;
-                var words = 0;
-                var bytes = 0;
-                for (var line : file.lines().toList()) {
-                    lines += 1;
-                    words += line.split(" ").length;
-                    bytes += line.getBytes().length;
+            private ResultLine handle(BufferedReader file, String name) throws IOException {
+                int lines = 0, words = 0, bytes = 0;
+                int prev = ' ', c;
+                while ((c = file.read()) != -1) {
+                    bytes += 1;
+                    if ((char) c == '\n') {
+                        lines += 1;
+                    }
+                    if (Character.isWhitespace(prev) && !Character.isWhitespace(c)) {
+                        words += 1;
+                    }
+                    prev = c;
                 }
-                sb.append(lines).append("\t");
-                sb.append(words).append("\t");
-                sb.append(bytes).append("\t");
-                sb.append(name == null ? "" : name);
-                sb.append("\n");
-                return sb.toString();
+                return new ResultLine(lines, words, bytes, name);
             }
         };
+    }
+
+    private record ResultLine(int lines, int words, int bytes, String name) {
+        public String toString() {
+            return lines + "\t" +
+                    words + "\t" +
+                    bytes + "\t" +
+                    name +
+                    "\n";
+        }
     }
 }

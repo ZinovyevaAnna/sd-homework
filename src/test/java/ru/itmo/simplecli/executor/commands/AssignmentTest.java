@@ -1,4 +1,4 @@
-package ru.itmo.simplecli.executor.constructors;
+package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
@@ -11,7 +11,7 @@ class AssignmentTest {
     @Test
     void test() {
         var env = new EnvironmentManager();
-        var cmd = new Assignment().construct(List.of("var", "=", "value"), env);
+        var cmd = new Assignment(List.of("var", "=", "value"), env);
         cmd.execute(null);
         assertEquals("value", env.get("var"));
     }

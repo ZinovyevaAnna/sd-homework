@@ -1,4 +1,4 @@
-package ru.itmo.simplecli.executor.constructors;
+package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
@@ -29,7 +29,7 @@ class WCTest {
     @Test
     void testFile() {
         var filename = path + "testfile";
-        var cmd = new WC().construct(List.of(filename), env);
+        var cmd = new WC(List.of(filename), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         try {
@@ -44,7 +44,7 @@ class WCTest {
     @Test
     void testFiles() {
         var filename = path + "testfile";
-        var cmd = new WC().construct(List.of(filename, filename), env);
+        var cmd = new WC(List.of(filename, filename), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         try {
@@ -58,7 +58,7 @@ class WCTest {
 
     @Test
     void testNoFile() {
-        var cmd = new WC().construct(new ArrayList<>(), env);
+        var cmd = new WC(new ArrayList<>(), env);
         var input = "test wc";
         cmd.execute(input);
         try {
@@ -74,7 +74,7 @@ class WCTest {
 
     @Test
     void testNoFileNoInput() {
-        var cmd = new WC().construct(new ArrayList<>(), env);
+        var cmd = new WC(new ArrayList<>(), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.ERROR, cmd.getEndStatus());
     }

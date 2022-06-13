@@ -1,4 +1,4 @@
-package ru.itmo.simplecli.executor.constructors;
+package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
@@ -14,7 +14,7 @@ class EchoTest {
     @Test
     void testOneArg() {
         var env = new EnvironmentManager();
-        var cmd = new Echo().construct(List.of("arg"), env);
+        var cmd = new Echo(List.of("arg"), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         assertEquals("arg", cmd.getOutput());
@@ -23,7 +23,7 @@ class EchoTest {
     @Test
     void testMultipleArg() {
         var env = new EnvironmentManager();
-        var cmd = new Echo().construct(List.of("arg1", "arg2"), env);
+        var cmd = new Echo(List.of("arg1", "arg2"), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         assertEquals("arg1 arg2", cmd.getOutput());
@@ -32,7 +32,7 @@ class EchoTest {
     @Test
     void testNonemptyInput() {
         var env = new EnvironmentManager();
-        var cmd = new Echo().construct(List.of("arg"), env);
+        var cmd = new Echo(List.of("arg"), env);
         cmd.execute("something");
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         assertEquals("arg", cmd.getOutput());
@@ -41,7 +41,7 @@ class EchoTest {
     @Test
     void testNoArg() {
         var env = new EnvironmentManager();
-        var cmd = new Echo().construct(new ArrayList<>(), env);
+        var cmd = new Echo(new ArrayList<>(), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS,
                 cmd.getEndStatus());

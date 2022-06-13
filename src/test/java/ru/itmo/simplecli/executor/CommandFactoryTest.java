@@ -1,7 +1,7 @@
 package ru.itmo.simplecli.executor;
 
 import org.junit.jupiter.api.Test;
-import ru.itmo.simplecli.executor.constructors.*;
+import ru.itmo.simplecli.executor.commands.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,32 +16,32 @@ class CommandFactoryTest {
     void testImplemented() {
         var args = List.of("cat");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new Cat().construct(args.subList(1, args.size()), env).getClass());
+                Cat.class);
 
 
         args = List.of("echo");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new Echo().construct(args.subList(1, args.size()), env).getClass());
+                Echo.class);
 
 
         args = List.of("exit");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new Exit().construct(args.subList(1, args.size()), env).getClass());
+                Exit.class);
 
 
         args = List.of("pwd");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new Pwd().construct(args.subList(1, args.size()), env).getClass());
+                Pwd.class);
 
 
         args = List.of("wc");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new WC().construct(args.subList(1, args.size()), env).getClass());
+                WC.class);
 
 
         args = List.of("unknowncommand");
         assertEquals(Objects.requireNonNull(CommandFactory.construct(args, env)).getClass(),
-                new External().construct(args.subList(1, args.size()), env).getClass());
+                External.class);
 
         assertNull(CommandFactory.construct(new ArrayList<>(), env));
     }

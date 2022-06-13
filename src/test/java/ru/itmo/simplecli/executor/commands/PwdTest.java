@@ -1,4 +1,4 @@
-package ru.itmo.simplecli.executor.constructors;
+package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
@@ -14,7 +14,7 @@ class PwdTest {
     @Test
     void test() {
         var env = new EnvironmentManager();
-        var cmd = new Pwd().construct(new ArrayList<>(), env);
+        var cmd = new Pwd(new ArrayList<>(), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
         assertEquals(Paths.get("").toAbsolutePath().toString(), cmd.getOutput());

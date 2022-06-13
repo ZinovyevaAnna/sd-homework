@@ -1,4 +1,4 @@
-package ru.itmo.simplecli.executor.constructors;
+package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
@@ -14,7 +14,7 @@ class ExitTest {
     @Test
     void test() {
         var env = new EnvironmentManager();
-        var cmd = new Exit().construct(new ArrayList<>(), env);
+        var cmd = new Exit(new ArrayList<>(), env);
         cmd.execute(null);
         assertEquals(Executable.EndStatus.EXIT, cmd.getEndStatus());
         assertNull(cmd.getOutput());

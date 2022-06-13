@@ -1,13 +1,12 @@
 # simplecli
 
 Implemented build-ins:
-- [cat](src/main/java/ru/itmo/simplecli/executor/constructors/Cat.java)
-- [echo](src/main/java/ru/itmo/simplecli/executor/constructors/Echo.java)
-- [exit](src/main/java/ru/itmo/simplecli/executor/constructors/Exit.java)
-- [grep](src/main/java/ru/itmo/simplecli/executor/constructors/Grep.java)
-- [pwd](src/main/java/ru/itmo/simplecli/executor/constructors/Pwd.java)
-- [wc](src/main/java/ru/itmo/simplecli/executor/constructors/WC.java)
-- [variable assignment](src/main/java/ru/itmo/simplecli/executor/constructors/Assignment.java)
+- [cat](src/main/java/ru/itmo/simplecli/executor/commands/Cat.java)
+- [echo](src/main/java/ru/itmo/simplecli/executor/commands/Echo.java)
+- [exit](src/main/java/ru/itmo/simplecli/executor/commands/Exit.java)
+- [pwd](src/main/java/ru/itmo/simplecli/executor/commands/Pwd.java)
+- [wc](src/main/java/ru/itmo/simplecli/executor/commands/WC.java)
+- [variable assignment](src/main/java/ru/itmo/simplecli/executor/commands/Assignment.java)
 
 [Main](src/main/java/ru/itmo/simplecli/Main.java) runs loop until `exit` command is given.
 If the entered string contains incomplete quotes, it asks to continue typing.

@@ -1,4 +1,7 @@
-package ru.itmo.simplecli.executor;
+package ru.itmo.simplecli.executor.commands;
+
+import ru.itmo.simplecli.executor.EnvironmentManager;
+import ru.itmo.simplecli.executor.Executable;
 
 import java.util.List;
 

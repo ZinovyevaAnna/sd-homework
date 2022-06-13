@@ -1,5 +1,12 @@
 # simplecli
 
+### How to run
+
+Run [main](src/main/java/ru/itmo/simplecli/Main.java)
+method from IDE **or** `./gradlew run`.
+
+### What's there
+
 Implemented build-ins:
 - [cat](src/main/java/ru/itmo/simplecli/executor/commands/Cat.java)
 - [echo](src/main/java/ru/itmo/simplecli/executor/commands/Echo.java)

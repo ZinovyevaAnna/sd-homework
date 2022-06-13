@@ -1,9 +1,13 @@
 plugins {
-    java
+    application
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+application {
+    mainClass.set("ru.itmo.simplecli.Main")
+}
+
+group = "ru.itmo"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -23,4 +27,8 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }

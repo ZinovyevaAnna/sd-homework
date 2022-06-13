@@ -2,34 +2,36 @@ package ru.itmo.simplecli;
 
 import ru.itmo.simplecli.executor.*;
 
+import java.io.PrintStream;
 import java.util.*;
 
 /**
  * Entry point. Loop: read - parse - execute.
  */
 public class Main {
+    private static final Scanner input = new Scanner(System.in);
+    private static final PrintStream output = new PrintStream(System.out);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         EnvironmentManager environment = new EnvironmentManager();
         Parser parser = new Parser(environment);
 
         while (true) {
-            System.out.print(">> ");
-            String input = scanner.nextLine();
-            if (input.trim().equals("")) {
+            output.print(">> ");
+            String nextLine = Main.input.nextLine();
+            if (nextLine.trim().equals("")) {
                 continue;
             }
 
-            parser.parse(input);
+            parser.parse(nextLine);
             while (parser.hasUnclosedQuote()) {
-                System.out.print("> ");
-                input = input + scanner.nextLine();
-                parser.parse(input);
+                output.print("> ");
+                nextLine = nextLine + Main.input.nextLine();
+                parser.parse(nextLine);
             }
 
             var command = PipedCommandFactory.construct(parser.getResult(), environment);
             if (command == null) {
-                System.out.println("Can't construct command");
+                output.println("Can't construct command");
                 continue;
             }
 
@@ -38,7 +40,7 @@ public class Main {
                 break;
             }
             if (command.getOutput() != null) {
-                System.out.println(command.getOutput());
+                output.println(command.getOutput());
             }
         }
     }

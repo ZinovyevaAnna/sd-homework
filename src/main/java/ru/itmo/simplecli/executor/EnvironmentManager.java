@@ -10,6 +10,7 @@ public class EnvironmentManager {
 
     /**
      * If there is no local variable uses global environment
+     *
      * @param name name of the variable
      * @return value of the variable
      */
@@ -25,7 +26,8 @@ public class EnvironmentManager {
 
     /**
      * Set or rewrites variable value
-     * @param name name of a variable
+     *
+     * @param name  name of a variable
      * @param value value of a variable
      */
     public final void set(String name, String value) {

@@ -8,8 +8,8 @@ public abstract class AbstractCommandFactory {
 
     protected boolean isAssignment(List<String> args) {
         return args.size() == 3
-                && Pattern.matches("\\w+", args.get(0))
-                && args.get(1).equals("=")
-                && Pattern.matches("\\w+", args.get(2));
+            && Pattern.matches("\\w+", args.get(0))
+            && args.get(1).equals("=")
+            && Pattern.matches("\\w+", args.get(2));
     }
 }

@@ -17,8 +17,9 @@ public class Cat extends Command {
     public Cat(List<String> args, EnvironmentManager environment) {
         super(args, environment);
     }
+
     @Override
-    public void execute (String input) {
+    public void execute(String input) {
         if (args.size() == 0 && input == null) {
             status = EndStatus.ERROR;
             output = "Not enough arguments for `cat` command";

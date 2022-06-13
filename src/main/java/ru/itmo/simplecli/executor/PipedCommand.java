@@ -6,9 +6,9 @@ import java.util.List;
  * Piped command executes every command, pass output of one as input to the next one
  */
 class PipedCommand implements Executable {
+    private final List<Executable> executables;
     private EndStatus status;
     private String output;
-    private final List<Executable> executables;
 
     public PipedCommand(List<Executable> executables) {
         this.executables = executables;

@@ -12,6 +12,7 @@ public class Main {
     private static final Scanner input = new Scanner(System.in);
     private static final PrintStream output = new PrintStream(System.out);
     private static final AbstractCommandFactory commandFactory = new PipedCommandFactory();
+
     public static void main(String[] args) {
         EnvironmentManager environment = new EnvironmentManager();
         Parser parser = new Parser(environment);

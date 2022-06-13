@@ -4,14 +4,9 @@ package ru.itmo.simplecli.executor;
  * Class for anything that can be executed
  */
 public interface Executable {
-    enum EndStatus {
-        SUCCESS,
-        ERROR,
-        EXIT
-    }
-
     /**
      * Executes with the given input
+     *
      * @param input
      */
     void execute(String input);
@@ -25,4 +20,10 @@ public interface Executable {
      * @return status of execution
      */
     EndStatus getEndStatus();
+
+    enum EndStatus {
+        SUCCESS,
+        ERROR,
+        EXIT
+    }
 }

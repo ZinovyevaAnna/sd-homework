@@ -38,49 +38,6 @@ public class Parser {
         return state != State.NO_QUOTED;
     }
 
-    private class Wrapped {
-        protected StringBuilder value;
-        Wrapped(StringBuilder value) {
-            this.value = value;
-        }
-        public String getValue() {
-            if (value.indexOf("$") == -1) {
-                return value.toString();
-            }
-            var start = value.indexOf("$");
-            var end = start + 1;
-            while (end < value.length()) {
-                var symbol = value.charAt(end);
-                if (!Character.isAlphabetic(symbol)
-                && !Character.isDigit(symbol)
-                && !(symbol == '_')) {
-                        break;
-                }
-                end++;
-            }
-            var varName = value.substring(start + 1, end);
-            value.delete(start, end);
-            value.insert(start, environment.get(varName));
-            return getValue();
-        }
-    }
-
-    private class SingleQuoted extends Wrapped {
-        SingleQuoted(StringBuilder value) {
-            super(value);
-        }
-        @Override
-        public String getValue() {
-            return value.toString();
-        }
-    }
-
-    private class DoubleQuoted extends Wrapped {
-        DoubleQuoted(StringBuilder value) {
-            super(value);
-        }
-    }
-
     private void runParse(String string) {
         StringBuilder current = new StringBuilder();
         for (int pos = 0; pos < string.length(); pos++) {
@@ -140,5 +97,51 @@ public class Parser {
         NO_QUOTED,
         DOUBLE_QUOTED,
         SINGLE_QUOTED
+    }
+
+    private class Wrapped {
+        protected StringBuilder value;
+
+        Wrapped(StringBuilder value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            if (value.indexOf("$") == -1) {
+                return value.toString();
+            }
+            var start = value.indexOf("$");
+            var end = start + 1;
+            while (end < value.length()) {
+                var symbol = value.charAt(end);
+                if (!Character.isAlphabetic(symbol)
+                    && !Character.isDigit(symbol)
+                    && !(symbol == '_')) {
+                    break;
+                }
+                end++;
+            }
+            var varName = value.substring(start + 1, end);
+            value.delete(start, end);
+            value.insert(start, environment.get(varName));
+            return getValue();
+        }
+    }
+
+    private class SingleQuoted extends Wrapped {
+        SingleQuoted(StringBuilder value) {
+            super(value);
+        }
+
+        @Override
+        public String getValue() {
+            return value.toString();
+        }
+    }
+
+    private class DoubleQuoted extends Wrapped {
+        DoubleQuoted(StringBuilder value) {
+            super(value);
+        }
     }
 }

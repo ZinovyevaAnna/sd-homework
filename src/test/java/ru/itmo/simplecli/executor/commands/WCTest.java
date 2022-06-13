@@ -24,6 +24,7 @@ public class WCTest extends AbstractCommandTest {
         process.waitFor();
         return new String(process.getInputStream().readAllBytes());
     }
+
     private String callExternal(List<String> args, String input) throws IOException, InterruptedException {
         var process = new ProcessBuilder(args).start();
         process.getOutputStream().write(input.getBytes());

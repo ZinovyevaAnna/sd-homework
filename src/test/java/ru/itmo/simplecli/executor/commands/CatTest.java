@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 abstract class CatTest extends AbstractCommandTest {
     private final EnvironmentManager env = new EnvironmentManager();
     private final String path = "src/test/";
+
     @Test
     void testFile() {
         var cmd = new Cat(List.of(path + "testfile"), env);

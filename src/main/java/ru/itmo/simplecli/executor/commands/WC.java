@@ -70,10 +70,10 @@ public class WC extends Command {
     private record ResultLine(int lines, int words, int bytes, String name) {
         public String toString() {
             return lines + "\t" +
-                    words + "\t" +
-                    bytes + "\t" +
-                    name +
-                    "\n";
+                words + "\t" +
+                bytes + "\t" +
+                name +
+                "\n";
         }
     }
 }

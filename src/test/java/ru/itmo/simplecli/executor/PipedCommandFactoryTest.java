@@ -16,7 +16,7 @@ public class PipedCommandFactoryTest {
     public void testPipe() {
         var env = new EnvironmentManager();
         var args = List.of(
-                "cat", "|", "echo", "|", "grep", "|", "exit", "|", "pwd", "|", "wc"
+            "cat", "|", "echo", "|", "grep", "|", "exit", "|", "pwd", "|", "wc"
         );
         assertNotNull(instance.construct(args, env));
         assertNull(instance.construct(List.of(), env));

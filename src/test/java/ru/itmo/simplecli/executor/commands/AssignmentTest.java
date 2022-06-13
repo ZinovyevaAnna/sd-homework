@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AssignmentTest extends AbstractCommandTest{
+public class AssignmentTest extends AbstractCommandTest {
     @Test
     void test() {
         var env = new EnvironmentManager();

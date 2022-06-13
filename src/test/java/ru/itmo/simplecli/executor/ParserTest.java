@@ -26,7 +26,7 @@ public class ParserTest {
 
         parser.parse("grep -i -w -A 10 pattern file1 file2");
         assertEquals(parser.getResult(),
-                List.of("grep", "-i", "-w", "-A", "10", "pattern", "file1", "file2"));
+            List.of("grep", "-i", "-w", "-A", "10", "pattern", "file1", "file2"));
 
         parser.parse("pwd");
         assertEquals(parser.getResult(), List.of("pwd"));
@@ -69,6 +69,6 @@ public class ParserTest {
     public void testPiped() {
         parser.parse(" cmd1 arg  |  cmd2 arg |  cmd3 arg ");
         assertEquals(parser.getResult(),
-                List.of("cmd1", "arg", "|", "cmd2", "arg", "|", "cmd3", "arg"));
+            List.of("cmd1", "arg", "|", "cmd2", "arg", "|", "cmd3", "arg"));
     }
 }

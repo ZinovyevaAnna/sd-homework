@@ -2,21 +2,20 @@ package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
-import ru.itmo.simplecli.executor.Executable;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PwdTest {
+public class PwdTest extends AbstractCommandTest {
 
     @Test
     void test() {
         var env = new EnvironmentManager();
         var cmd = new Pwd(new ArrayList<>(), env);
         cmd.execute(null);
-        assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
+        assertSuccess(cmd);
         assertEquals(Paths.get("").toAbsolutePath().toString(), cmd.getOutput());
     }
 

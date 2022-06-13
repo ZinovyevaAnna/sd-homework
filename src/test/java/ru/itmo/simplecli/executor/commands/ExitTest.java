@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class ExitTest {
+public class ExitTest extends AbstractCommandTest {
 
     @Test
     void test() {

@@ -2,7 +2,6 @@ package ru.itmo.simplecli.executor.commands;
 
 import org.junit.jupiter.api.Test;
 import ru.itmo.simplecli.executor.EnvironmentManager;
-import ru.itmo.simplecli.executor.Executable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,9 +9,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WCTest {
+public class WCTest extends AbstractCommandTest {
     private final EnvironmentManager env = new EnvironmentManager();
     private final String path = "src/test/";
+
+    private void assertSpaceInsensitive(String expected, String actual) {
+        var value1 = expected.trim().split("\\s+");
+        var value2 = actual.trim().split("\\s+");
+        assertArrayEquals(value1, value2);
+    }
 
     private String callExternal(List<String> args) throws IOException, InterruptedException {
         var process = new ProcessBuilder(args).start();
@@ -31,11 +36,9 @@ class WCTest {
         var filename = path + "testfile";
         var cmd = new WC(List.of(filename), env);
         cmd.execute(null);
-        assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
+        assertSuccess(cmd);
         try {
-            var expected = callExternal(List.of("wc", filename)).trim().split("\\s+");
-            var actual = cmd.getOutput().trim().split("\\s+");
-            assertArrayEquals(expected, actual);
+            assertSpaceInsensitive(callExternal(List.of("wc", filename)), cmd.getOutput());
         } catch (IOException | InterruptedException e) {
             fail();
         }
@@ -46,11 +49,9 @@ class WCTest {
         var filename = path + "testfile";
         var cmd = new WC(List.of(filename, filename), env);
         cmd.execute(null);
-        assertEquals(Executable.EndStatus.SUCCESS, cmd.getEndStatus());
+        assertSuccess(cmd);
         try {
-            var expected = callExternal(List.of("wc", filename, filename)).trim().split("\\s+");
-            var actual = cmd.getOutput().trim().split("\\s+");
-            assertArrayEquals(expected, actual);
+            assertSpaceInsensitive(callExternal(List.of("wc", filename, filename)), cmd.getOutput());
         } catch (IOException | InterruptedException e) {
             fail();
         }
@@ -62,11 +63,7 @@ class WCTest {
         var input = "test wc";
         cmd.execute(input);
         try {
-            var expected = callExternal(List.of("wc", "-"), input).trim().split("\\s+");
-            var actual = cmd.getOutput().trim().split("\\s+");
-            assertEquals(expected[0], actual[0]);
-            assertEquals(expected[1], actual[1]);
-            assertEquals(expected[2], actual[2]);
+            assertSpaceInsensitive(callExternal(List.of("wc", "-"), input), cmd.getOutput() + "-");
         } catch (IOException | InterruptedException e) {
             fail();
         }
@@ -74,8 +71,8 @@ class WCTest {
 
     @Test
     void testNoFileNoInput() {
-        var cmd = new WC(new ArrayList<>(), env);
+        var cmd = new WC(List.of(), env);
         cmd.execute(null);
-        assertEquals(Executable.EndStatus.ERROR, cmd.getEndStatus());
+        assertError(cmd);
     }
 }

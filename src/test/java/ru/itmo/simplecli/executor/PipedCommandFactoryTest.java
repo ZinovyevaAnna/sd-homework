@@ -8,15 +8,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class PipedCommandFactoryTest {
+public class PipedCommandFactoryTest {
+
+    public AbstractCommandFactory instance = new PipedCommandFactory();
 
     @Test
-    void testPipe() {
+    public void testPipe() {
         var env = new EnvironmentManager();
-        var args = List.of(List.of("cat"), List.of("echo"),
-                List.of("grep"), List.of("exit"), List.of("pwd"), List.of("wc"));
-        assertNotNull(PipedCommandFactory.construct(args, env));
-        assertNull(PipedCommandFactory.construct(List.of(new ArrayList<>()), env));
+        var args = List.of(
+                "cat", "|", "echo", "|", "grep", "|", "exit", "|", "pwd", "|", "wc"
+        );
+        assertNotNull(instance.construct(args, env));
+        assertNull(instance.construct(List.of(), env));
     }
 
 }

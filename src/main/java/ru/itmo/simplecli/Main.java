@@ -11,13 +11,14 @@ import java.util.*;
 public class Main {
     private static final Scanner input = new Scanner(System.in);
     private static final PrintStream output = new PrintStream(System.out);
+    private static final AbstractCommandFactory commandFactory = new PipedCommandFactory();
     public static void main(String[] args) {
         EnvironmentManager environment = new EnvironmentManager();
         Parser parser = new Parser(environment);
 
         while (true) {
             output.print(">> ");
-            String nextLine = Main.input.nextLine();
+            String nextLine = input.nextLine();
             if (nextLine.trim().equals("")) {
                 continue;
             }
@@ -25,11 +26,15 @@ public class Main {
             parser.parse(nextLine);
             while (parser.hasUnclosedQuote()) {
                 output.print("> ");
-                nextLine = nextLine + Main.input.nextLine();
+                nextLine = nextLine + input.nextLine();
                 parser.parse(nextLine);
             }
 
-            var command = PipedCommandFactory.construct(parser.getResult(), environment);
+            if (parser.getResult().equals(List.of(""))) {
+                continue;
+            }
+
+            var command = commandFactory.construct(parser.getResult(), environment);
             if (command == null) {
                 output.println("Can't construct command");
                 continue;

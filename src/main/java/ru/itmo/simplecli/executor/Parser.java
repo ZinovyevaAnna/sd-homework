@@ -27,20 +27,8 @@ public class Parser {
     /**
      * @return result of parsing
      */
-    public List<List<String>> getResult() {
-        var processed = result.stream().map(Wrapped::getValue).toList();
-        List<List<String>> piped = new ArrayList<>();
-        List<String> current = new ArrayList<>();
-        for (var element : processed) {
-            if (element.equals("|")) {
-                piped.add(current);
-                current = new ArrayList<>();
-            } else {
-                current.add(element);
-            }
-        }
-        piped.add(current);
-        return piped;
+    public List<String> getResult() {
+        return result.stream().map(Wrapped::getValue).toList();
     }
 
     /**

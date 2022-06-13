@@ -8,8 +8,9 @@ import java.util.regex.Pattern;
 /**
  * Class to construct commands
  */
-public class CommandFactory {
-    public static Executable construct(List<String> args, EnvironmentManager environment) {
+public class SingleCommandFactory extends AbstractCommandFactory {
+    @Override
+    public Executable construct(List<String> args, EnvironmentManager environment) {
         if (args.size() == 0) {
             return null;
         }
@@ -27,10 +28,4 @@ public class CommandFactory {
         };
     }
 
-    private static boolean isAssignment(List<String> args) {
-        return args.size() == 3
-                && Pattern.matches("\\w+", args.get(0))
-                && args.get(1).equals("=")
-                && Pattern.matches("\\w+", args.get(2));
-    }
 }

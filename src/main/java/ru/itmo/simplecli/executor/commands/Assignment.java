@@ -15,5 +15,6 @@ public class Assignment extends Command {
     @Override
     public void execute(String input) {
         environment.set(args.get(0), args.get(2));
+        status = EndStatus.SUCCESS;
     }
 }

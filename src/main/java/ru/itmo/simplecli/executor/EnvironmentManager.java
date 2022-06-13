@@ -20,7 +20,7 @@ public class EnvironmentManager {
         if (System.getenv().containsKey(name)) {
             return System.getenv(name);
         }
-        return null;
+        return "";
     }
 
     /**

@@ -7,12 +7,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AssignmentTest {
+public class AssignmentTest extends AbstractCommandTest{
     @Test
     void test() {
         var env = new EnvironmentManager();
         var cmd = new Assignment(List.of("var", "=", "value"), env);
         cmd.execute(null);
+        assertSuccess(cmd);
         assertEquals("value", env.get("var"));
     }
 }
